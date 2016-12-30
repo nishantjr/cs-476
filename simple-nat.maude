@@ -1,15 +1,23 @@
 fmod SIMPLE-NAT is
-    sort Nat .
-    op zero : -> Nat .
-    op id_ : Nat -> Nat .       --- identity function
-    op s_ : Nat -> Nat .        --- successor function
-    op _+_ : Nat Nat -> Nat .
 
+    sort Nat .
     vars N M : Nat .
+
+    op zero : -> Nat .
+    --- eq zero = zero .        --- cjs just wanted to show that they're the
+                                --- same value. Instead, infinite loop?
+                                --- Why would it actually run anything for this.
+                                --- N <- zero; M <- zero; M = N
+
+    op id_ : Nat -> Nat .       --- identity function
     eq id N = N .
 
+    op s_ : Nat -> Nat .        --- successor function
+
+    op _+_ : Nat Nat -> Nat .
     eq zero + N = N .
     eq s M + N = s ( M + N ) .
+
 endfm
 
 ---(
