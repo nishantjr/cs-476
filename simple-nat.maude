@@ -1,0 +1,18 @@
+fmod SIMPLE-NAT is
+    sort Nat .
+    op zero : -> Nat .
+    op id_ : Nat -> Nat .       --- identity function
+    op s_ : Nat -> Nat .        --- successor function
+    op _+_ : Nat Nat -> Nat .
+
+    vars N M : Nat .
+    eq id N = N .
+
+    eq zero + N = N .
+    eq s M + N = s ( M + N ) .
+endfm
+
+---(
+    id :: a -> a
+    id x = x
+)
