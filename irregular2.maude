@@ -1,0 +1,13 @@
+--- `op x` claims to be associative but isn't
+fmod IRREGULAR2 is
+   sorts A B C .
+   subsorts A B < C .
+   op x : A B -> A [assoc] .
+   op x : B A -> B [assoc] .
+
+   var a : A .
+   var b : B .
+   eq x(a, b) = a .
+   eq x(b, a) = b .
+
+endfm

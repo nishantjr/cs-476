@@ -1,0 +1,10 @@
+--- Not preregular, since f(a) has two possible types: B or A
+fmod IRREGULAR is
+    sorts A B C D .
+    subsorts A < B C < D .
+    op a : -> A .
+    op f : B -> B .
+    op f : C -> C .
+
+endfm
+
