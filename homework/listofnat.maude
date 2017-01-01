@@ -1,0 +1,21 @@
+set include BOOL off .
+
+fmod LIST-of-NAT is protecting NAT .
+  sort List .
+  subsort Nat < List .
+  op nil : -> List [ctor] .
+  op _;_ : List List -> List [ctor assoc] .
+  op length : List -> Nat .
+  var N : Nat .
+  var L : List .
+  eq nil ; L = L .
+  eq L ; nil = L .
+  eq length(nil) = 0 .
+  eq length(N) = 1 .
+  eq length(N ; L) = 1 + length(L) .
+endfm
+
+--- UNCOMMENT THIS GOAL TO USE IT
+--- (goal listlength : LIST-of-NAT
+   |- A{L:List ; L':List}
+      ((length(L ; L')) = (length(L) + length(L'))) .)

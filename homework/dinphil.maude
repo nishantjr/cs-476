@@ -1,0 +1,65 @@
+fmod NAT/4 is 
+   protecting NAT . 
+   sort Nat/4 .
+   op [_] : Nat -> Nat/4 .
+   op _+_ : Nat/4 Nat/4 -> Nat/4 .
+   op _*_ : Nat/4 Nat/4 -> Nat/4 .
+   op p : Nat/4 -> Nat/4 .
+   vars N M : Nat .
+   ceq [N] = [N rem 4] if N >= 4 .
+   eq [N] + [M] = [N + M] .
+   eq [N] * [M] = [N * M] .
+   ceq p([0]) = [N] if s(N) := 4 .
+   ceq p([s(N)]) = [N] if N < 4 .
+endfm
+
+mod DIN-PHIL is 
+   protecting NAT/4 .
+   sorts Oid Cid Attribute AttributeSet Configuration Object Msg .
+   sorts Phil Mode .
+   subsort Nat/4 < Oid .
+   subsort Attribute < AttributeSet . 
+   subsort Object < Configuration . 
+   subsort Msg < Configuration . 
+   subsort Phil < Cid .
+
+   op __ : Configuration Configuration -> Configuration 
+                                                  [ assoc comm id: none ] . 
+	op _`,_ : AttributeSet AttributeSet -> AttributeSet 
+                                                  [ assoc comm id: null ] . 
+   op null : -> AttributeSet . 
+   op none : -> Configuration . 
+   op mode`:_ : Mode -> Attribute [ gather ( & ) ] . 
+   op holds`:_ : Configuration -> Attribute [ gather ( & ) ] . 
+   op <_:_|_> : Oid Cid AttributeSet -> Object . 
+   op Phil : -> Phil . 
+
+   ops t h e : -> Mode .
+   op chop : Nat/4 Nat/4 -> Msg [comm] .
+   op init : -> Configuration .
+   op make-init : Nat/4 -> Configuration . 
+
+   vars N M K : Nat .
+   var C : Configuration .
+
+   ceq init = make-init([N]) if s(N) := 4 .
+   ceq make-init([s(N)]) 
+     = < [s(N)] : Phil | mode : t , holds : none >  make-init([N])  (chop([s(N)],[N]))
+     if N < 4 .
+   ceq make-init([0]) = 
+      < [0] : Phil | mode : t , holds : none > chop([0],[N]) if  s(N) := 4 .
+
+   rl [t2h] : < [N] : Phil | mode : t , holds : none > =>
+      < [N] : Phil | mode : h , holds : none > .
+   crl [pickl] :  < [N] : Phil | mode : h , holds : none > chop([N],[M]) 
+       => < [N] : Phil | mode : h , holds :  chop([N],[M]) > if [M] = [s(N)] .
+   rl [pickr] :  < [N] : Phil | mode : h , holds : chop([N],[M]) > 
+      chop([N],[K]) => 
+      < [N] : Phil | mode : h , holds :  chop([N],[M]) chop([N],[K]) > .
+   rl [h2e] :  < [N] : Phil | mode : h , holds :  chop([N],[M]) 
+      chop([N],[K]) > => < [N] : Phil | mode : e , 
+      holds :  chop([N],[M]) chop([N],[K]) > .
+   rl [e2t] :  < [N] : Phil | mode : e , holds :  chop([N],[M]) 
+      chop([N],[K]) >  =>   chop([N],[M]) chop([N],[K])  
+      < [N] : Phil | mode : t , holds :  none > . 
+endm

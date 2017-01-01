@@ -1,0 +1,17 @@
+mod R&W is 
+  sort Nat Config .
+  op <_,_> : Nat Nat -> Config [ctor] .  --- readers/writers
+  op 0 : -> Nat [ctor] .
+  op s : Nat -> Nat [ctor] .
+  vars R W : Nat .
+
+  rl < 0, 0 > => < 0, s(0) > .
+  rl < R, s(W) > => < R, W > .
+  rl < R, 0 > => < s(R), 0 > .
+  rl < s(R), W > => < R, W > .
+endm
+
+mod R&W-ABS is
+   including R&W-PREDS .
+   eq < s(s(N:Nat)),0 > = < s(0),0 > .
+endm

@@ -1,0 +1,10 @@
+(fmod ACKERMAN is
+  sort Natu .
+  op o : -> Natu [ctor] .
+  op s : Natu -> Natu [ctor] .
+  op ack : Natu Natu -> Natu .
+  vars N M : Natu .
+  eq ack(o,M) = s(M) .
+  eq ack(s(N),o) = ack(N,s(o)) .
+  eq ack(s(N),s(M)) = ack(N,ack(s(N),M)) .
+endfm)

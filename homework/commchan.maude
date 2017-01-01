@@ -1,0 +1,15 @@
+mod COMM-CHANN is protecting NAT . protecting QID .
+  sorts Msg MsgMSet QidList State .
+  subsort Msg < MsgMSet .
+  subsort Qid < QidList .
+  op nil : -> QidList [ctor] .
+  op _;_ : QidList QidList -> QidList [ctor assoc id: nil] .
+  op [_,_] : Qid Nat -> Msg [ctor] .
+  op null : -> MsgMSet [ctor] .
+  op _ _ : MsgMSet MsgMSet -> MsgMSet [ctor assoc comm id: null] .
+  op [_:_|_|_:_] : QidList Nat MsgMSet Nat QidList -> State [ctor] .
+  vars N M I J : Nat . var MS : MsgMSet . vars L L’ : QidList .
+  vars A B : Qid .
+  rl [send] : [A ; L : I | MS | J : L’] => [L : s(I) | [A,I] MS | J : L’] .
+  rl [receive] : [L : I | MS [A,J] | J : L’] => [L : I | MS | s(J) : L’ ; A] .
+endm

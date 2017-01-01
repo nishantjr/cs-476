@@ -1,0 +1,18 @@
+fmod NAT-MSET-MIN is
+  sorts Nat NatMSet .
+  subsort Nat < NatMSet .
+  op 0 : -> Nat [ctor] .
+  op s : Nat -> Nat [ctor] .
+  op _ _ : NatMSet NatMSet -> NatMSet [assoc comm ctor] .
+  op _<_ : Nat Nat -> Bool .
+  op min : NatMSet -> Nat .
+  vars N M : Nat .
+  var  S : NatMSet .
+  eq 0 < s(N) = true .
+  eq s(N) < 0 = false .
+  eq s(N) < s(M) = N < M .
+  eq min(N N S) = min(N S) .
+  ceq min(N M S) = min(N S) if N < M .
+  ceq min(N M) = N if N < M .
+  eq min(N) = N .
+endfm

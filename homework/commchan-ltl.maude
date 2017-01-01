@@ -1,0 +1,42 @@
+mod COMM-CHANN is protecting NAT .  protecting QID .
+sorts Msg MsgMSet QidList CHState .
+subsort Msg <  MsgMSet .
+subsort Qid < QidList .
+
+op nil : -> QidList [ctor] . 
+op _;_ : QidList QidList -> QidList [ctor assoc id: nil] .
+op [_,_] : Qid Nat -> Msg [ctor] .
+op null : -> MsgMSet [ctor] .
+op _ _ :  MsgMSet MsgMSet -> MsgMSet [ctor assoc comm id: null] .
+op [_:_|_|_:_] : QidList Nat MsgMSet Nat QidList -> CHState [ctor] .
+
+vars N M I J : Nat . var MS : MsgMSet . vars L L' : QidList .
+vars A B : Qid .
+
+rl [send] : [A ; L : I | MS | J : L'] => [L : s(I) | [A,I] MS | J : L'] .
+rl [receive] : [L : I | MS [A,J] | J : L'] => [L : I | MS | s(J) : L' ; A] .
+endm
+
+load model-checker.maude
+
+mod COMM-CHANN-PREDS is protecting COMM-CHANN . including SATISFACTION .
+subsort CHState < State .
+op in-order-reception : QidList -> Prop .
+op received : QidList -> Prop .
+
+vars N M I J : Nat . var MS : MsgMSet . vars L L' L'' : QidList .
+
+*** add your defining equations here
+
+endm
+
+mod COMM-CHANN-CHECK is
+protecting COMM-CHANN-PREDS .
+including MODEL-CHECKER .
+ops init1 init2 init3  : -> CHState . 
+eq init1 = ['a ; 'b ; 'c : 0 | null | 0 : nil ] .
+eq init2 = ['a ; 'b ; 'c ; 'd : 0 | null | 0 : nil ] .
+eq init3 = ['a ; 'b ; 'c ; 'd ; 'e : 0 | null | 0 : nil ] .
+endm
+
+*** add your LTL commands here

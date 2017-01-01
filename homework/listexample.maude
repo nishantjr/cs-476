@@ -1,0 +1,14 @@
+(fmod LIST-EXAMPLE is
+ sorts Element List . 
+ subsorts Element < List .
+ op a : -> Element [ctor] . 
+ op b : -> Element [ctor] . 
+ op c : -> Element [ctor] .
+ op nil : -> List [ctor] .
+ op _;_  : List List -> List .
+ op _;_  : Element List -> List [ctor] .
+ vars L P Q : List .
+ eq (L ; P) ; Q = L ; (P ; Q) .
+ eq L ; nil = L .
+ eq nil ; L = L .
+endfm)

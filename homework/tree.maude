@@ -1,0 +1,16 @@
+fmod TREE is
+  protecting QID .
+  sorts Natural Tree .
+  subsort Qid < Tree .
+  op 0 : -> Natural [ctor].
+  op s : Natural -> Natural [ctor].
+  op _+_ : Natural Natural -> Natural [assoc comm].
+  op _#_ : Tree Tree -> Tree [ctor] .
+  ops leaves inner : Tree -> Natural .
+  var I : Qid .
+  vars N M : Natural .
+  vars T T' : Tree .
+  eq N + 0 = N .
+  eq N + s(M) = s(N + M) .
+  *** add equations for leaves and inner here
+endfm

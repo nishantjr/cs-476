@@ -1,0 +1,29 @@
+set include BOOL off .
+
+mod COMM-CHAN is
+  sorts Nat Msg MsgMSet Elt NeList List CHState .
+  subsort Msg <  MsgMSet .
+  subsort Elt < NeList < List .
+
+  op 0 : -> Nat [ctor] .
+  op s : Nat -> Nat [ctor] .
+  ops a b c d  : -> Elt [ctor] .
+  op _;_ : NeList NeList -> NeList [ctor assoc] .
+  op _;_ : List List -> List [ctor assoc] .
+  op nil : -> List [ctor] .
+  op [_,_] : Elt Nat -> Msg [ctor] .
+  op null : -> MsgMSet [ctor] .
+  op _ _ :  MsgMSet MsgMSet -> MsgMSet [ctor assoc comm id: null] .
+  op <_@_:_|_|_:_> : List List Nat MsgMSet Nat List -> CHState [ctor] .
+
+  vars N M I J : Nat . var MS : MsgMSet . vars L L' : NeList . var P Q : List .
+  vars A B : Elt .
+
+  eq Q ; nil = Q [variant] .
+  eq nil ; Q = Q [variant] .
+
+  rl [send] : < P @ A ; L : I | null     | J : Q   > => < P @ L   : s(I) | [A,I] | J    : Q      > .
+  rl [send] : < P @ A     : I | null     | J : Q   > => < P @ nil : s(I) | [A,I] | J    : Q      > .
+  rl [rec]  : < P @ Q     : I | MS [A,J] | J : nil > => < P @ Q   : I    | MS    | s(J) : A      > .
+  rl [rec]  : < P @ Q     : I | MS [A,J] | J : L'  > => < P @ Q   : I    | MS    | s(J) : L' ; A > .
+endm

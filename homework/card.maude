@@ -1,0 +1,14 @@
+fmod CARD is
+  sorts Natural MSet .
+  subsort Natural < MSet .
+  op 0 : -> Natural [ctor] .
+  op s : Natural -> Natural [ctor] .
+  op _+_ : Natural Natural -> Natural .
+  op __ : MSet MSet -> MSet [ctor assoc comm] .
+  op card : MSet -> Natural .
+  vars N M : Natural .
+  vars U V : MSet .
+  eq N + 0 = N .
+  eq N + s(M) = s(N + M) .
+  eq card(N U) = s(card(U)) .
+endfm
