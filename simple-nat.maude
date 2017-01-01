@@ -14,9 +14,39 @@ fmod SIMPLE-NAT is
 
     op s_ : Nat -> Nat .        --- successor function
 
-    op _+_ : Nat Nat -> Nat .
+    op _+_ : Nat Nat -> Nat [ prec 31  ] .
     eq zero + N = N .
     eq s M + N = s ( M + N ) .
+
+    op _*_ : Nat Nat -> Nat [ prec 33 ] .
+    eq zero * N = zero .
+    eq s M * N =  M * N + N  .
+
+    op _>_ : Nat Nat -> Bool .
+    eq zero > zero = false .
+    eq zero > s N = false .
+    eq s N > zero = true .
+    eq s N > s M = N > M .
+
+    op _>=_ : Nat Nat -> Bool .
+    eq zero >= zero = true .
+    eq zero >= s N = false .
+    eq s N >= zero = true .
+    eq s N >= s M = N >= M .
+
+    op max : Nat Nat -> Nat [comm] .
+    eq max(zero, zero) = zero .
+    eq max(zero, s M) = s M .
+    eq max(s N, s M) = s max(N, M) .
+
+    op min : Nat Nat -> Nat [comm] .
+    eq min(zero, zero) = zero .
+    eq min(zero, s M) = zero .
+    eq min(s N, s M) = s min(N, M) .
+
+    op even : Nat -> Bool .
+    eq even(zero) = true .
+    eq even(s N) = not even(N) .
 
 endfm
 
