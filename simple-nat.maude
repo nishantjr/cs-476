@@ -14,11 +14,11 @@ fmod SIMPLE-NAT is
 
     op s_ : Nat -> Nat .        --- successor function
 
-    op _+_ : Nat Nat -> Nat [ prec 31  ] .
+    op _+_ : Nat Nat -> Nat [ prec 33  ] .
     eq zero + N = N .
     eq s M + N = s ( M + N ) .
 
-    op _*_ : Nat Nat -> Nat [ prec 33 ] .
+    op _*_ : Nat Nat -> Nat [ prec 31 ] .
     eq zero * N = zero .
     eq s M * N =  M * N + N  .
 
