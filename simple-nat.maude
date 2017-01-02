@@ -48,6 +48,16 @@ fmod SIMPLE-NAT is
     eq even(zero) = true .
     eq even(s N) = not even(N) .
 
+    op _! : Nat -> Nat .
+    eq zero ! = 1 .
+    eq (s N) ! = s(N) * (N !) .
+
+    ops  0 1 2 3 : -> Nat .
+    eq 0 = zero .
+    eq 1 = s 0 .
+    eq 2 = s 1 .
+    eq 3 = s 2 .
+
 endfm
 
 ---(
