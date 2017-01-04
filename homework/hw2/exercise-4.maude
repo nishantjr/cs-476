@@ -18,11 +18,50 @@ fmod RELATION-APPLICATION is protecting RAT .
   eq P,P = P .                             *** idempotency
   eq n in mt = false .                     *** membership
 
-
   eq n in m,S = (n == m) or n in S .       *** membership
 
   *** your equations defining the functions  _[_], dom, and pfun here
-  *** if you need to declare any other variables or auxiliary
-  *** functions besides those above, you can also do so
+  eq n [null] = mt .
+  eq n [[n, r],R] = r, (n [R]) . 
+  eq n [[m, r],R] = n [R] .
+
+  eq dom(null) = mt .
+  eq dom([n, r], R) = n, dom(R) .
+
+  eq pfun(null) = true .
+  eq pfun([n, r], R) = if | n [R] | == 0 then pfun(R) else false fi .
+
+  *** Helper functions
+
+  var RS : RatSet .
+  op |_| : RatSet -> Nat .                 *** cardinality
+  eq | mt   | = 0 .
+  eq | r,RS | = 1 + | RS | .
+
+  *** Unit tests and test helpers
+  op testRelation : -> Rel .
+  eq testRelation = [2, 4], [3, 4], [5, 2], [5, 7], [6, 5] .
+
+  op testFunction : -> Rel .
+  eq testFunction = [2, 4], [3, 4], [5, 2], [6, 5] .
+
+  op unitTest : -> Bool .
+  eq unitTest = true
+      and 2 [testRelation] == 4
+      and 5 [testRelation] == 2,7
+      and 99 [testRelation] == mt
+      and 1 [null] == mt
+
+      and dom(null) == mt
+      and dom(testRelation) == 2,3,5,6
+      and dom(testFunction) == 2,3,5,6
+
+      and | mt | == 0
+      and | 2,3,4 | == 3
+
+      and pfun(null) == true
+      and pfun(testRelation) == false
+      and pfun(testFunction) == true
+  .
 
 endfm
