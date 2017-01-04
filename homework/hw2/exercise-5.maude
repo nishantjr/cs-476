@@ -15,4 +15,27 @@ fmod NAT-MSET-MIN is
   ceq min(N M S) = min(N S) if N < M .
   ceq min(N M) = N if N < M .
   eq min(N) = N .
+
+*** Solution
+  eq 0 < 0 = false .
+  ceq min(N M) = M if not N < M .
+
+*** Unit tests
+op unitTest : -> Bool .
+eq unitTest = true
+  --- Expressions that didn't used to work
+  and          0 < 0          == false        --- Reduces to: result Bool: 0 < 0
+  and s(s(s(0))) < s(s(s(0))) == false        --- Reduces to: result Bool: 0 < 0
+
+  and min(0 0) == 0
+  and min(s(0) s(0)) == s(0)
+
+  --- Did we break things?
+  and    s(s(0)) < s(s(s(0))) == true
+  and s(s(s(0))) < s(s(0))    == false
+
+  and min(s(0) 0) == 0
+  and min(0 s(0)) == 0
+  and min(0 s(s(s(0))) s(0)) == 0
+.
 endfm
