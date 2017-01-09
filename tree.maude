@@ -1,0 +1,29 @@
+---(Exercise from lecture 3
+
+    Continue playing with Maude. Define other functions
+    on commonly used data types. For example, define
+    binary trees that have natural numbers in their leaves,
+    and define three functions: (i) tree reverse, (ii) max
+    and min (give the biggest, resp. smallest, number
+    stored in the tree), and (iii) insert, which inserts a
+    number in the tree, so that numbers to its left in the
+    tree will be smaller.
+)
+fmod BINARY-TREE is protecting NAT .
+    sorts NeTree Tree .
+    subsorts Nat NeTree < Tree .
+
+    op nil : -> Tree .
+    op (_ _ _) : Tree Nat Tree -> NeTree .
+
+    op reverse : Tree -> Tree .
+    op max : NeTree -> Nat .
+    op min : NeTree -> Nat .
+
+    vars L R : Tree .
+    vars N : Nat .
+    eq reverse(nil) = nil .
+    eq reverse(N) = N .
+    eq reverse((L N R)) = (reverse(R) N reverse(L)) .
+
+endfm
