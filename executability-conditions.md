@@ -30,16 +30,16 @@ sort-decreasingness
   before for all substitutions).
 
 Determinism / Confluence
-: Rewrite theory $(\Sigma B, R)$ is confluent if $\forall t \in \bigunion
-  T_{\Sigma(Y)}, t {\to_{R/B}^{*}} u,$ and $t {\to_{R/B}^{*}} v$, then there is a term $w \in \bigunion
+: Rewrite theory $(\Sigma B, R)$ is confluent if $\forall t \in \bigcup
+  T_{\Sigma(Y)}, t {\to_{R/B}^{*}} u,$ and $t {\to_{R/B}^{*}} v$, then there is a term $w \in \bigcup
   T_{\Sigma(Y)}$ such that $u {\to_{R/B}^{*}} w$ and $v {\to_{R/B}^{*}} w$
   rewrite a term, there are rewrite rules such that the final term is the same
 
-  $R$ is ground confluent modulo $B$ if this holds for $\bigunion T_{\Sigma}$
-  but not $\bigunion T_{\Sigma(Y)}$
+  $R$ is ground confluent modulo $B$ if this holds for $\bigcup T_{\Sigma}$
+  but not $\bigcup T_{\Sigma(Y)}$
 
 Joinable ($t \downarrow t'$)
-: $t$ and $t'$ are joinable iff $\exists w \in \bigunion T_{\Sigma(Y)}$, such that $t {\to_{R/B}^{*}} w$ and $t' {\to_{R/B}^{*}} w$.
+: $t$ and $t'$ are joinable iff $\exists w \in \bigcup T_{\Sigma(Y)}$, such that $t {\to_{R/B}^{*}} w$ and $t' {\to_{R/B}^{*}} w$.
 
 Terminating or strongly normalizing
 : $(\Sigma, B, R)$ is strongly terminating if ${\to_{R/B}^{*}}$ is well founded.  
@@ -47,9 +47,9 @@ Terminating or strongly normalizing
 
 
 Weakly terminating $t\to^!_{E/B}$
-: for any $t \in \bigunion T_{\Sigma(Y)}$ has a **R/B-normal form**.
-: $\exists v \in \bigunion T_{\Sigma(Y)} : t {\to_{R/B}^{*}} v, \nexists w \in
-\bigunion T_{\Sigma(Y)} : v {\to_{R/B}}} w$.
+: for any $t \in \bigcup T_{\Sigma(Y)}$ has a **R/B-normal form**.
+: $\exists v \in \bigcup T_{\Sigma(Y)} : t {\to_{R/B}^{*}} v, \nexists w \in
+\bigcup T_{\Sigma(Y)} : v {\to_{R/B}} w$.
 : if for all terms, at least one sequence of rewrites terminates.
 
 B-Preregular
@@ -63,8 +63,8 @@ $B$-matching algorithm
   If there is such a substitution, then $t$ and $t'$ beta match.
 
 Normal Form
-: For $t \in \bigunion T_{\Sigma(Y)}$, if $t {\to_{R/B}^{*}} v$ and $\nexists w
-\in \bigunion T_{\Sigma(Y)}$, such that $v {\to_{R/B}} w$ then $v$ is the normal
+: For $t \in \bigcup T_{\Sigma(Y)}$, if $t {\to_{R/B}^{*}} v$ and $\nexists w
+\in \bigcup T_{\Sigma(Y)}$, such that $v {\to_{R/B}} w$ then $v$ is the normal
 form of $t$
 
 Canonical form $can_{E/B}(t)$
@@ -74,7 +74,7 @@ canonical form.
 Sufficient Completeness
 : Given Rewrite theory $(\Sigma, B, R)$, $\Omega \subseteq \Sigma$ with the same
 sorts/subsorts. Then $R$ is **sufficiently complete modulo B** w.r.t. 
-$\Omega$, iff for each $t \in \T_{\Sigma,s}, \exists t' \in T_{\Omega,s}$,
+$\Omega$, iff for each $t \in T_{\Sigma,s}, \exists t' \in T_{\Omega,s}$,
 such that $t {\to_{R/B}^{!}} t'$.
 
 
