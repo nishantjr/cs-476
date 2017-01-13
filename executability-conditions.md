@@ -19,23 +19,22 @@ For $(\Sigma, B, R)$,
 3. Confluence
 4. Terminates
 5. Conditions on $B$
-  - B-Matching algorithm
-  - Variables of $B$ at kind level
-  - Equations in B should be pre-regular
-6. $R$ should be sufficiently complete w.r.t. $\omega$, the set of ctors.
+   - B-Matching algorithm
+   - Variables of $B$ at kind level
+   - Equations in B should be pre-regular
+6. $R$ should be sufficiently complete w.r.t. $\Omega$, the set of ctors.
 
 sort-decreasingness
-: For all transform rules $t\to t'$, and substitutions $\theta$, $t\theta : S
+: For all transform rules $t\to t'$, and substitutions $\theta$, $\quad t\theta : S
   \Rightarrow t'\theta : s$ (the sort after applying the rule is the same as
   before for all substitutions).
 
 Determinism / Confluence
-: Rewrite theory $(\Sigma B, R)$ is confluent if $\forall t \in \bigcup
+: Rewrite theory $(\Sigma, B, R)$ is confluent if $\forall t \in \bigcup
   T_{\Sigma(Y)}, t {\to_{R/B}^{*}} u,$ and $t {\to_{R/B}^{*}} v$, then there is a term $w \in \bigcup
   T_{\Sigma(Y)}$ such that $u {\to_{R/B}^{*}} w$ and $v {\to_{R/B}^{*}} w$
-  rewrite a term, there are rewrite rules such that the final term is the same
 
-  $R$ is ground confluent modulo $B$ if this holds for $\bigcup T_{\Sigma}$
+  $R$ is only ground confluent modulo $B$ if this holds for $\bigcup T_{\Sigma}$
   but not $\bigcup T_{\Sigma(Y)}$
 
 Joinable ($t \downarrow t'$)
